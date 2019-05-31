@@ -23,7 +23,9 @@ int main(int argc, char **argv)
   // Repeatly read and print entries
   while ((d = readdir(dircty)) != NULL)
   {
-    printf("%s\n", d->d_name);
+    struct stat buf;
+    stat(d->d_name, &buf);
+    printf("%lld %s\n", buf.st_size, d->d_name);
   }
 
   // Close directory
